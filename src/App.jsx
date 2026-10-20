@@ -1,17 +1,31 @@
-import ProductBadge from "./Components/ProductBadge/ProductBadge.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ProductGrid from "./Components/ProductGrid/ProductGrid.jsx";
+import MainLayout from "./Components/MainLayout/MAinLayout.jsx";
+import NotFound from "./Components/NotFound/NotFound.jsx";
+import ProductDetails from "./Components/ProductDetails/ProductDetails.jsx";
 
-
+const route = createBrowserRouter([{
+  path:"/",
+  element:<MainLayout/>,
+  children:[{
+    index:true,
+    element:<ProductGrid/>
+  },
+  {
+    path:"products",
+    element:<ProductGrid/>
+  },
+  { path: 'product/:id',
+     element: <ProductDetails /> },
+  {
+    path:"*",
+    element:<NotFound/>
+  }
+]
+}])
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center gap-4 p-6">
-      <h1 className="text-2xl font-bold text-gray-800">تجربة مكونات المتجر (Shop.co)</h1>
-      
-      {/* هنا بنعمل ريندر للـ Sub-component بتاعنا ونبعتله الـ props */}
-      <div className="relative w-64 h-32 bg-white rounded-xl shadow-md p-4">
-        <ProductBadge text="20% OFF" type="sale" />
-        <p className="mt-8 text-gray-600">هنا مكان كارت المنتج...</p>
-      </div>
-    </div>
+   <RouterProvider router={route} />
   );
 }
 
