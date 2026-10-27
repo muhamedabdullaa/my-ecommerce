@@ -1,8 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProductGrid from "./Components/ProductGrid/ProductGrid.jsx";
-import MainLayout from "./Components/MainLayout/MAinLayout.jsx";
+import MainLayout from "./Components/MainLayout/MainLayout.jsx";
 import NotFound from "./Components/NotFound/NotFound.jsx";
 import ProductDetails from "./Components/ProductDetails/ProductDetails.jsx";
+import CartProvider from "./Components/CartPRovider/CartProvider.jsx";
+import Cart from "./Components/Cart/Cart.jsx";
 
 const route = createBrowserRouter([{
   path:"/",
@@ -17,6 +19,7 @@ const route = createBrowserRouter([{
   },
   { path: 'product/:id',
      element: <ProductDetails /> },
+  { path: 'cart', element: <Cart /> },
   {
     path:"*",
     element:<NotFound/>
@@ -25,7 +28,9 @@ const route = createBrowserRouter([{
 }])
 function App() {
   return (
-   <RouterProvider router={route} />
+    <CartProvider>
+      <RouterProvider router={route} />
+   </CartProvider >
   );
 }
 

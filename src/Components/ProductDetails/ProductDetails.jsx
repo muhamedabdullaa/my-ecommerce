@@ -1,11 +1,14 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { useCart } from '../CartPRovider/CartProvider'
 
 const ProductDetails = () => {
     const {id} = useParams()
     const [product , setProduct] = useState(null)
     const [loading , setLoading] = useState(true)
+
+    const {cartItems,AddToCart} = useCart()
 useEffect(()=>{
     async function FetchProduct() {
         try{
@@ -64,7 +67,9 @@ if (loading) {
             </div>
           </div>
 
-          <button className="mt-8 w-full py-4 bg-black text-white text-sm font-bold rounded-xl hover:bg-indigo-600 transition-colors duration-300 cursor-pointer">
+          <button onClick={()=>{
+            AddToCart(product); alert("Added To Cart Successfully")
+          }} className="mt-8 w-full py-4 bg-black text-white text-sm font-bold rounded-xl hover:bg-indigo-600 transition-colors duration-300 cursor-pointer">
             Add to Cart 
           </button>
         </div>

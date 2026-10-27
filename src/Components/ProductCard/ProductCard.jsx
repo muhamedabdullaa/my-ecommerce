@@ -3,8 +3,17 @@ import ProductBadge from '../ProductBadge/ProductBadge'
 import ProductImage from './../ProductImage/ProductImage';
 import ProductPrice from '../ProductPrice/ProductPrice';
 import { Link } from 'react-router-dom';
+import { useCart } from '../CartPRovider/CartProvider';
 
 const ProductCard = ({product}) => {
+ 
+  const {AddToCart} = useCart()
+  const handleAddToCart = (e) => {
+    e.preventDefault(); 
+    e.stopPropagation(); 
+    AddToCart(product); 
+    alert("Added To Cart Successfully 🛒"); 
+  };
   return (
    <Link to={`/product/${product.id}`}> 
 
@@ -26,8 +35,8 @@ const ProductCard = ({product}) => {
         
           <ProductPrice price={product.price} originalPrice={product.originalPrice} />
           
-          <button onClick={(e)=>e.preventDefault()} className="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium rounded-lg  cursor-pointer transition-transform duration-300 hover:scale-103">
-            Add to Cart
+          <button onClick={handleAddToCart} className="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium rounded-lg  cursor-pointer transition-transform duration-300 hover:scale-103">
+            Add to Cart         
           </button>
         </div>
       </div>
