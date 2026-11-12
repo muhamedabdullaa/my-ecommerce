@@ -5,6 +5,7 @@ import NotFound from "./Components/NotFound/NotFound.jsx";
 import ProductDetails from "./Components/ProductDetails/ProductDetails.jsx";
 import CartProvider from "./Components/CartPRovider/CartProvider.jsx";
 import Cart from "./Components/Cart/Cart.jsx";
+import Checkout from "./Components/Checkout/Checkout.jsx";
 
 const route = createBrowserRouter([{
   path:"/",
@@ -20,6 +21,10 @@ const route = createBrowserRouter([{
   { path: 'product/:id',
      element: <ProductDetails /> },
   { path: 'cart', element: <Cart /> },
+  {
+  path: "/checkout",
+  element: <Checkout />
+},
   {
     path:"*",
     element:<NotFound/>
